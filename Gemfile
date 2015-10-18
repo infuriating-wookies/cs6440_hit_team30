@@ -23,7 +23,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-<<<<<<< HEAD
 gem 'devise'
 
 gem "therubyracer"
@@ -32,7 +31,7 @@ gem "twitter-bootstrap-rails"
 
 gem "annotate"
 
-# good library for making external http requests 
+# good library for making external http requests
 gem 'httparty'
 
 # Use ActiveModel has_secure_password
