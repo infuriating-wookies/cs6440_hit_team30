@@ -22,16 +22,24 @@ class FhirConnection
     JSON.parse(r.body)
   end
 
-  def self.get_patient_prescriptions(id)
+  def self.get_patient_prescriptions(user_id)
     href = BASE_URL + "/MedicationPrescription"
     r = HTTParty.get(href,
       headers: DEFAULT_HEADERS,
-      query: {'patient._id' => id}
+      query: {'patient._id' => user_id}
     )
     return nil unless r.success?
     JSON.parse(r.body)
-
   end
 
+  def self.get_medication(id)
+    href = BASE_URL + "/Medication"
+    r = HTTParty.get(href,
+      headers: DEFAULT_HEADERS,
+      query: {'_id' => id}
+    )
+    return nil unless r.success?
+    JSON.parse(r.body)
+  end
 
 end
