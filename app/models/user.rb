@@ -27,4 +27,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :user_medications
+
+  def initialize(options={})
+    FhirConnection.create_user(options[:lastname], options[:firstname], options[:gender], options[:address], options[:city], options[:state], options[:postal_code], options[:birthday])
+    options[:fhir_id] = FhirConnection.find_user_id(options[:lastname], options[:firstname]).to_s
+    options.delete(:city)
+    options.delete(:address)
+    options.delete(:state)
+    options.delete(:gender)
+    options.delete(:postal_code)
+    super(options)
+  end
 end
