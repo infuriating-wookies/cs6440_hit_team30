@@ -99,6 +99,20 @@ class FhirConnection
     return r.code == 201
   end
 
+  # this looks up a user by their first and alst name and returns their ID
+  def self.find_user_id(last_name, first_name)
+    href = BASE_URL + "/Patient"
+    r = HTTParty.get(href,
+      headers: DEFAULT_HEADERS,
+      query: {
+        'family' => last_name,
+        'given' => first_name,
+      }
+    )
+    return nil unless r.success?
+    JSON.parse(r.body)['entry'][0]['resource']['id']
+  end
+
   private
 
   def self.height_measurement_json(patient_id, height_in_cm)
