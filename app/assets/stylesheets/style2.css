@@ -1,8 +1,8 @@
-      html, body {
+      /*html, body {
         margin: 0;
         padding: 0;
 		background: #ebebeb;
-		
+
       }
 
       .container {
@@ -11,7 +11,7 @@
         padding: 0 10px;
       }
 
-      
+
       .jumbotron {
         background: url() no-repeat center center;
         background-size: cover;
@@ -27,7 +27,7 @@
         list-style-type: none;
         margin: 0;
         padding: 20px 0;
-		
+
       }
 
       .nav li {
@@ -38,9 +38,9 @@
         font-size: 12px;
         margin-right: 25px;
         text-transform: uppercase;
-		
+
       }
-	  
+
 .racing-stripe {
     width: 100%;
     height: 5px;
@@ -77,12 +77,13 @@
         margin-bottom: 80px;
         text-transform: uppercase;
       }
-*/	  
+*/
+/*
 .contact-form {
     margin: 0 auto;
     width: 60%;
     background: #3EA1F5;
-    text-align: center;	
+    text-align: center;
 
 }
 
@@ -133,7 +134,7 @@ input[type="submit"]:hover {
     transition: all 0.5s ease-in-out;
 }
 form p {
-    color: gray;	
+    color: gray;
 }
 form p a {
     color: #004498;
@@ -165,9 +166,9 @@ form p a:hover {
         letter-spacing: 1.3px;
         padding: 10px 20px;
         text-decoration: none;
-        text-transform: uppercase;  
+        text-transform: uppercase;
         display: inline-block;
-        margin-bottom: 20px;      
+        margin-bottom: 20px;
       }
 
       @media (min-width:720px) {
@@ -231,4 +232,4 @@ form p a:hover {
         .supporting .col {
           width: 100%;
         }
-      }
+      }*/
