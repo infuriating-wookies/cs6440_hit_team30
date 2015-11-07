@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   before_create :setup_fhir
 
   def setup_fhir
-    result = FhirConnection.create_user(lastname, firstname, gender, address, city, state, postal_code, birthday)
-    self.fhir_id = FhirConnection.find_user_id(lastname, firstname).to_i
+    result = FhirConnection.create_user(lastname.downcase, firstname.downcase, gender, address, city, state, postal_code, birthday)
+    self.fhir_id = FhirConnection.find_user_id(lastname.downcase, firstname.downcase).to_i
   end
 end
