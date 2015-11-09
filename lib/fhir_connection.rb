@@ -60,6 +60,19 @@ class FhirConnection
     JSON.parse(r.body)
   end
 
+  def self.get_patient_bmi_observations(user_id)
+    href = BASE_URL + "/Observation"
+    r = HTTParty.get(href,
+                     headers: DEFAULT_HEADERS,
+                     query: {
+                         'patient' => user_id,
+                         'code' => 'LOINC|39156-5'
+                     }
+    )
+    return nil unless r.success?
+    JSON.parse(r.body)
+  end
+
   def self.make_patient_height_observation(user_id, height_in_inches)
     href = BASE_URL + "/Observation"
     r = HTTParty.post(href,
@@ -74,6 +87,15 @@ class FhirConnection
     r = HTTParty.post(href,
       headers: CREATE_HEADERS,
       body: height_measurement_json(user_id, weight_in_kg)
+    )
+    return r.code == 201
+  end
+
+  def self.make_patient_bmi_observation(user_id, bmi_in_kg_m2)
+    href = BASE_URL + "/Observation"
+    r = HTTParty.post(href,
+                      headers: CREATE_HEADERS,
+                      body: bmi_measurement_json(user_id, bmi_in_kg_m2)
     )
     return r.code == 201
   end
@@ -122,7 +144,8 @@ class FhirConnection
         coding: [
           {
             system: "http://loinc.org",
-            code: "8302-2"
+            code: "8302-2",
+            display:"Body height Measured"
           }
         ]
       },
@@ -147,12 +170,13 @@ class FhirConnection
         coding: [
           {
             system: "http://loinc.org",
-            code: "3141-9"
+            code: "3141-9",
+            display:"Body weight Measured"
           }
         ]
       },
       valueQuantity: {
-        value: height_in_cm,
+        value: weight_in_kg,
         units: "kg",
         system: "http://unitsofmeasure.org",
         code: "kg"
@@ -162,6 +186,32 @@ class FhirConnection
       subject: {
         reference: "Patient/#{patient_id}"
       }
+    }.to_json
+  end
+
+  def self.bmi_measurement_json(patient_id, bmi_in_kg_m2)
+    {
+        resourceType: "Observation",
+        code: {
+            coding: [
+                {
+                    system: "http://loinc.org",
+                    code: "39156-5",
+                    display:"Body mass index (BMI) [Ratio]"
+                }
+            ]
+        },
+        valueQuantity: {
+            value: bmi_in_kg_m2,
+            units: "kg/m2",
+            system: "http://unitsofmeasure.org",
+            code: "kg/m2"
+        },
+        appliesDateTime: Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        status: "final",
+        subject: {
+            reference: "Patient/#{patient_id}"
+        }
     }.to_json
   end
 
@@ -192,6 +242,16 @@ class FhirConnection
       ],
       active: true
     }.to_json
-end
+  end
 
+  # def self.get_patient_condition(user_id, id)
+  #
+  #   href = BASE_URL + "/Condition"
+  #   r = HTTParty.get(href,
+  #                    headers: DEFAULT_HEADERS,
+  #                    query: {'patient' => user_id, '_id' =>id}
+  #   )
+  #   return nil unless r.success?
+  #   JSON.parse(r.body)
+  # end
 end
