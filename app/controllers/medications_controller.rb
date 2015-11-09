@@ -7,6 +7,6 @@ class MedicationsController < ApplicationController
     @medication_json["entry"].each do |entry|
       medication_ids << entry['resource']['medication']['reference']
     end
-    @specific_medications = medication_ids.map { |e| FhirConnection.get_medication(e) }
+    @specific_medications = Hash[medication_ids.map { |e| [e, FhirConnection.get_medication(e)] }]
   end
 end

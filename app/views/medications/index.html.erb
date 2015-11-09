@@ -1,12 +1,9 @@
-<h2> Here is your medication json data </h2>
+<h2> Your prescriptions </h2>
 
-<p> We will make this prettier when we can, but for now you just get the data </p>
 
 <% @medication_json['entry'].each do |medication| %>
+  <% specific_medication = @specific_medications[medication['resource']['medication']['reference']]['entry'][0]['resource'] %>
+  <strong>Medication: </strong> <%= specific_medication['name'] %> <br>
   <strong>Dosage: </strong> <%= medication['resource']['dosageInstruction'][0]['doseQuantity']['value'] %> <%= medication['resource']['dosageInstruction'][0]['doseQuantity']['units'] %>
-
+  <br> <br>
 <% end %>
-
-<p> Here is the info about the specific medications this patient is on: </p>
-
-<p> <%= @specific_medications %> </p>
