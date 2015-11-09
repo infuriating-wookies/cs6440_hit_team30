@@ -2,11 +2,14 @@
 
 [![Build Status](https://travis-ci.org/infuriating-wookies/cs6440_hit_team30.svg?branch=master)](https://travis-ci.org/infuriating-wookies/cs6440_hit_team30)
 
+**Application URL**  
+https://infurating-wookies.herokuapp.com/
+
+
+
 **Team 30 HIt Project Workspace**
 
 Here are some helpful resources for getting set up with rails: http://guides.rubyonrails.org/getting_started.html
-
-App URL: https://infurating-wookies.herokuapp.com/
 
 Here are some helpful commands for getting a rails app set up:
 
