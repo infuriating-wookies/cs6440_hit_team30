@@ -18,5 +18,6 @@ Here are some helpful commands for getting a rails app set up:
     # rails console
     # history
     # rake -T
+    # rake db:create (first time only)
     # rake db:migrate
     # rails server

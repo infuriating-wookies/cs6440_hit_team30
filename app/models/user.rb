@@ -27,4 +27,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :user_medications
+
+  before_create :setup_fhir
+
+  def setup_fhir
+    result = FhirConnection.create_user(lastname.downcase, firstname.downcase, gender, address, city, state, postal_code, birthday)
+    self.fhir_id = FhirConnection.find_user_id(lastname.downcase, firstname.downcase).to_i
+  end
 end

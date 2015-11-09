@@ -1,0 +1,33 @@
+<h2> Basic info </h2>
+
+<h4> Patient: </h4>
+<strong> Name: </strong> <%= "#{@current_user.firstname} #{@current_user.lastname}" %>
+<br>
+<strong> Email: </strong> <%= @current_user.email %>
+<br>
+<strong> Gender: </strong> <%= @current_user.gender %>
+<br>
+<strong> Birthday: </strong> <%= @current_user.birthday.to_date.to_s %>
+<br>
+
+<strong> State: </strong> <%= @current_user.state %>
+
+<% if @height_info['total'] > 0 %>
+  <h4> Height: </h4>
+  <strong> Measurement: </strong> <%= @height_info['entry'].last['resource']['valueQuantity']['value'] %>
+  <strong><%= @height_info['entry'].last['resource']['valueQuantity']['units'] %> </strong>
+  <br>
+  <strong> Time of Measurement: </strong>
+  <%= DateTime.parse(@height_info['entry'].last['resource']['appliesDateTime']).to_date.to_s %>
+  <br>
+<% end %>
+
+<% if @weight_info['total'] > 0 %>
+  <h4> Weight: </h4>
+  <strong> Measurement: </strong> <%= @weight_info['entry'].last['resource']['valueQuantity']['value'] %>
+  <strong><%= @weight_info['entry'].last['resource']['valueQuantity']['units'] %> </strong>
+  <br>
+  <strong> Time of Measurement: </strong>
+  <%= DateTime.parse(@weight_info['entry'].last['resource']['appliesDateTime']).to_date.to_s %>
+  <br>
+<% end %>
