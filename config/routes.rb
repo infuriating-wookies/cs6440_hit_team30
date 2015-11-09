@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :test, only: [:show]
   resources :medications, only: [:index]
+  resources :basic_info, only: [:index]
   # You can have the root of your site routed with "root"
   root 'pages#index'
 
