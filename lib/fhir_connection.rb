@@ -28,7 +28,7 @@ class FhirConnection
     href = BASE_URL + "/MedicationPrescription"
     r = HTTParty.get(href,
       headers: DEFAULT_HEADERS,
-      query: {'patient._id' => user_id}
+      query: {'patient' => user_id}
     )
     return nil unless r.success?
     JSON.parse(r.body)

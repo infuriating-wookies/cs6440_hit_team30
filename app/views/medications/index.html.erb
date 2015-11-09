@@ -1,9 +1,10 @@
 <h2> Your prescriptions </h2>
 
-
-<% @medication_json['entry'].each do |medication| %>
-  <% specific_medication = @specific_medications[medication['resource']['medication']['reference']]['entry'][0]['resource'] %>
-  <strong>Medication: </strong> <%= specific_medication['name'] %> <br>
-  <strong>Dosage: </strong> <%= medication['resource']['dosageInstruction'][0]['doseQuantity']['value'] %> <%= medication['resource']['dosageInstruction'][0]['doseQuantity']['units'] %>
-  <br> <br>
+<% if @medication_json['total'] > 0 %>
+  <% @medication_json['entry'].each do |medication| %>
+    <% specific_medication = @specific_medications[medication['resource']['medication']['reference']]['entry'][0]['resource'] %>
+    <strong>Medication: </strong> <%= specific_medication['name'] %> <br>
+    <strong>Dosage: </strong> <%= medication['resource']['dosageInstruction'][0]['doseQuantity']['value'] %> <%= medication['resource']['dosageInstruction'][0]['doseQuantity']['units'] %>
+    <br> <br>
+  <% end %>
 <% end %>

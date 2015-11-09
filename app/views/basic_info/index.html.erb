@@ -12,18 +12,22 @@
 
 <strong> State: </strong> <%= @current_user.state %>
 
-<h4> Height: </h4>
-<strong> Measurement: </strong> <%= @height_info['entry'].last['resource']['valueQuantity']['value'] %>
-<strong><%= @height_info['entry'].last['resource']['valueQuantity']['units'] %> </strong>
-<br>
-<strong> Time of Measurement: </strong>
-<%= DateTime.parse(@height_info['entry'].last['resource']['appliesDateTime']).to_date.to_s %>
-<br>
+<% if @height_info['total'] > 0 %>
+  <h4> Height: </h4>
+  <strong> Measurement: </strong> <%= @height_info['entry'].last['resource']['valueQuantity']['value'] %>
+  <strong><%= @height_info['entry'].last['resource']['valueQuantity']['units'] %> </strong>
+  <br>
+  <strong> Time of Measurement: </strong>
+  <%= DateTime.parse(@height_info['entry'].last['resource']['appliesDateTime']).to_date.to_s %>
+  <br>
+<% end %>
 
-<h4> Weight: </h4>
-<strong> Measurement: </strong> <%= @weight_info['entry'].last['resource']['valueQuantity']['value'] %>
-<strong><%= @weight_info['entry'].last['resource']['valueQuantity']['units'] %> </strong>
-<br>
-<strong> Time of Measurement: </strong>
-<%= DateTime.parse(@weight_info['entry'].last['resource']['appliesDateTime']).to_date.to_s %>
-<br>
+<% if @weight_info['total'] > 0 %>
+  <h4> Weight: </h4>
+  <strong> Measurement: </strong> <%= @weight_info['entry'].last['resource']['valueQuantity']['value'] %>
+  <strong><%= @weight_info['entry'].last['resource']['valueQuantity']['units'] %> </strong>
+  <br>
+  <strong> Time of Measurement: </strong>
+  <%= DateTime.parse(@weight_info['entry'].last['resource']['appliesDateTime']).to_date.to_s %>
+  <br>
+<% end %>
