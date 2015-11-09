@@ -6,6 +6,8 @@
 
 Here are some helpful resources for getting set up with rails: http://guides.rubyonrails.org/getting_started.html
 
+App URL: https://infurating-wookies.herokuapp.com/
+
 Here are some helpful commands for getting a rails app set up:
 
     # rvm list
