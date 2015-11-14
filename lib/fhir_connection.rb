@@ -86,7 +86,7 @@ class FhirConnection
     href = BASE_URL + "/Observation"
     r = HTTParty.post(href,
       headers: CREATE_HEADERS,
-      body: height_measurement_json(user_id, weight_in_kg)
+      body: weight_measurement_json(user_id, weight_in_kg)
     )
     return r.code == 201
   end
