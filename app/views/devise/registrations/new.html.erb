@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :gender %><br />
-    <%= f.text_field :gender, autofocus: true %>
+    <%= f.select :gender, [['Male', 'Male'], ['Female', 'Female'], ['Other', 'Other']], autofocus: true %>
   </div>
 
   <div class="field">
