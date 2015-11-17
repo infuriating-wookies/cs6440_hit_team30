@@ -31,3 +31,6 @@
   <%= DateTime.parse(@weight_info['entry'].last['resource']['appliesDateTime']).to_date.to_s %>
   <br>
 <% end %>
+
+
+<%= link_to 'Export as JSON', basic_info_index_path(format: :json) %>

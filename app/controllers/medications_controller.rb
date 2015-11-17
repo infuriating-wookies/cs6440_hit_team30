@@ -12,5 +12,9 @@ class MedicationsController < ApplicationController
     else
       @specific_medications = {}
     end
+    respond_to do |format|
+      format.html
+      format.json { render json: @medication_json }
+    end
   end
 end
