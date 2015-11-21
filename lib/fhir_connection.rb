@@ -62,13 +62,8 @@ class FhirConnection
 
   def self.get_patient_bmi_observations(user_id)
     href = BASE_URL + "/Observation"
-    r = HTTParty.get(href,
-                     headers: DEFAULT_HEADERS,
-                     query: {
-                         'patient' => user_id,
-                         'code' => 'LOINC|39156-5'
-                     }
-    )
+    r = HTTParty.get(href, headers: DEFAULT_HEADERS, query: {'patient' => user_id, 'code' => 'LOINC|39156-5'})
+    #binding.pry
     return nil unless r.success?
     JSON.parse(r.body)
   end
@@ -84,19 +79,24 @@ class FhirConnection
 
   def self.make_patient_weight_observation(user_id, weight_in_kg)
     href = BASE_URL + "/Observation"
+    body = weight_measurement_json(user_id, weight_in_kg)
     r = HTTParty.post(href,
       headers: CREATE_HEADERS,
-      body: weight_measurement_json(user_id, weight_in_kg)
+      body: body
     )
     return r.code == 201
   end
 
-  def self.make_patient_bmi_observation(user_id, bmi_in_kg_m2)
+  def self.make_patient_bmi_observation(user_id, bmi_in_kg_cm2)
     href = BASE_URL + "/Observation"
+    #binding.pry
+    body = bmi_measurement_json(user_id, bmi_in_kg_cm2)
+    #binding.pry
     r = HTTParty.post(href,
                       headers: CREATE_HEADERS,
-                      body: bmi_measurement_json(user_id, bmi_in_kg_m2)
+                      body: body
     )
+    #binding.pry
     return r.code == 201
   end
 
@@ -197,7 +197,7 @@ class FhirConnection
                 {
                     system: "http://loinc.org",
                     code: "39156-5",
-                    display:"Body mass index (BMI) [Ratio]"
+                    display:"Body mass ratio Measured"
                 }
             ]
         },
