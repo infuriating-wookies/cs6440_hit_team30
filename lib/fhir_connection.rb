@@ -244,6 +244,14 @@ class FhirConnection
     }.to_json
   end
 
+  def self.graphable_height_info(user_id)
+    get_patient_height_observations(user_id)['entry'].map{ |e| [e['resource']['valueQuantity']['value'], DateTime.strptime(e['resource']['appliesDateTime'])] }
+  end
+
+  def self.graphable_weight_info(user_id)
+    get_patient_weight_observations(user_id)['entry'].map{ |e| [e['resource']['valueQuantity']['value'], DateTime.strptime(e['resource']['appliesDateTime'])] }
+  end
+
   # def self.get_patient_condition(user_id, id)
   #
   #   href = BASE_URL + "/Condition"
