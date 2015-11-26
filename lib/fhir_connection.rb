@@ -53,7 +53,8 @@ class FhirConnection
       headers: DEFAULT_HEADERS,
       query: {
         'patient' => user_id,
-        'code' => 'LOINC|3141-9'
+        'code' => 'LOINC|3141-9',
+        '_count' => 200
       }
     )
     return nil unless r.success?
@@ -62,7 +63,13 @@ class FhirConnection
 
   def self.get_patient_bmi_observations(user_id)
     href = BASE_URL + "/Observation"
-    r = HTTParty.get(href, headers: DEFAULT_HEADERS, query: {'patient' => user_id, 'code' => 'LOINC|39156-5'})
+    r = HTTParty.get(href, headers: DEFAULT_HEADERS,
+      query: {
+        'patient' => user_id,
+        'code' => 'LOINC|39156-5',
+        '_count' => 100
+      }
+    )
     #binding.pry
     return nil unless r.success?
     JSON.parse(r.body)
@@ -98,6 +105,24 @@ class FhirConnection
     )
     #binding.pry
     return r.code == 201
+  end
+
+  def self.graphable_height_info(user_id)
+    get_patient_height_observations(user_id)['entry']
+      .map{ |e| [DateTime.strptime(e['resource']['appliesDateTime']).to_date.to_s, e['resource']['valueQuantity']['value']] }
+      .sort_by { |entry| entry[0] }
+  end
+
+  def self.graphable_weight_info(user_id)
+    get_patient_weight_observations(user_id)['entry']
+      .map{ |e| [DateTime.strptime(e['resource']['appliesDateTime']).to_date.to_s, e['resource']['valueQuantity']['value']] }
+      .sort_by { |entry| entry[0] }
+  end
+
+  def self.graphable_bmi_info(user_id)
+    get_patient_bmi_observations(user_id)['entry']
+      .map{ |e| [DateTime.strptime(e['resource']['appliesDateTime']).to_date.to_s, e['resource']['valueQuantity']['value']] }
+      .sort_by { |entry| entry[0] }
   end
 
   def self.get_medication(id)
@@ -242,14 +267,6 @@ class FhirConnection
       ],
       active: true
     }.to_json
-  end
-
-  def self.graphable_height_info(user_id)
-    get_patient_height_observations(user_id)['entry'].map{ |e| [e['resource']['valueQuantity']['value'], DateTime.strptime(e['resource']['appliesDateTime'])] }
-  end
-
-  def self.graphable_weight_info(user_id)
-    get_patient_weight_observations(user_id)['entry'].map{ |e| [e['resource']['valueQuantity']['value'], DateTime.strptime(e['resource']['appliesDateTime'])] }
   end
 
   # def self.get_patient_condition(user_id, id)

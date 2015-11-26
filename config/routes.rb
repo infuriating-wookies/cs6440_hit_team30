@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :test, only: [:show]
   resources :medications, only: [:index]
   resources :basic_info, only: [:index]
+  resources :graphs, only: [:index]
   resources :observations, only: [:index, :create]
 
   resources :pages, only: [:index] do
