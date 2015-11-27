@@ -5,7 +5,6 @@ class BasicInfoController < ApplicationController
     @height_info = FhirConnection.get_patient_height_observations(current_user.fhir_id)
     @weight_info =  FhirConnection.get_patient_weight_observations(current_user.fhir_id)
     @bmi_info = FhirConnection.get_patient_bmi_observations(current_user.fhir_id)
-    #binding.pry
     @current_user = current_user
     respond_to do |format|
       format.html
