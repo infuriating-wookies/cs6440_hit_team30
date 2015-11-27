@@ -62,7 +62,14 @@
 
   drawBmiChart();
 </script>
-<!--Div that will hold the pie chart-->
+
+<h2> Your Health Graphs </h2>
+
 <div id="weight_chart_div"></div>
 <br>
 <div id="bmi_chart_div"></div>
+
+<% unless @weight_data || @bmi_data %>
+  <h4> We're sorry, we don't have enough info to graph for you. Please record your
+    height and weight. </h4>
+<% end %>

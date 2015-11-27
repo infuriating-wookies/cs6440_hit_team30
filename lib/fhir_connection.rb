@@ -111,18 +111,24 @@ class FhirConnection
     get_patient_height_observations(user_id)['entry']
       .map{ |e| [DateTime.strptime(e['resource']['appliesDateTime']).to_date.to_s, e['resource']['valueQuantity']['value']] }
       .sort_by { |entry| entry[0] }
+  rescue StandardError => e
+    nil
   end
 
   def self.graphable_weight_info(user_id)
     get_patient_weight_observations(user_id)['entry']
       .map{ |e| [DateTime.strptime(e['resource']['appliesDateTime']).to_date.to_s, e['resource']['valueQuantity']['value']] }
       .sort_by { |entry| entry[0] }
+  rescue StandardError => e
+    nil
   end
 
   def self.graphable_bmi_info(user_id)
     get_patient_bmi_observations(user_id)['entry']
       .map{ |e| [DateTime.strptime(e['resource']['appliesDateTime']).to_date.to_s, e['resource']['valueQuantity']['value']] }
       .sort_by { |entry| entry[0] }
+  rescue StandardError => e
+    nil
   end
 
   def self.get_medication(id)
