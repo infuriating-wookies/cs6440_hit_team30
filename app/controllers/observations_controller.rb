@@ -1,5 +1,4 @@
 class ObservationsController < ApplicationController
-  require 'pry'
   before_action :authenticate_user!
 
   def index
