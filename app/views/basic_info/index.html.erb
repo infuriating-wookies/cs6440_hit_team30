@@ -32,7 +32,7 @@
   <br>
 <% end %>
 
-<% if @bmi_info.try('total') && (@bmi_info.try('total') > 0) %>
+<% if @bmi_info['total'] && (@bmi_info['total'] > 0) %>
     <h4> BMI: </h4>
     <strong> Measurement: </strong> <%= @bmi_info['entry'].last['resource']['valueQuantity']['value'] %>
     <strong><%= @bmi_info['entry'].last['resource']['valueQuantity']['units'] %> </strong>
