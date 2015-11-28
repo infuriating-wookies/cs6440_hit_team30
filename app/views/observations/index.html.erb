@@ -1,10 +1,11 @@
-<h2> Record your new health and weight </h2>
+<h2 class="text-center"> Record your new height and weight </h2>
 
-<%= form_tag("/observations", method: "post") do %>
+<%= form_tag("/observations", method: "post") do |f|%>
   <%= label_tag(:height, "Height (cm):") %>
-  <%= number_field_tag(:height) %>
-  <br>
-  <%= label_tag(:height, "Weight (kg):") %>
-  <%= number_field_tag(:weight) %>
-  <%= submit_tag("Submit") %>
+  <%= number_field_tag(:height, class: "form-control")%>
+  <br><br>
+  <%= label_tag(:height, "Weight (kg):")%>
+  <%= number_field_tag(:weight, class: "form-control") %>
+  <br><br>
+  <%= submit_tag("Submit", class: "btn btn-primary btn-lg") %>
 <% end %>
