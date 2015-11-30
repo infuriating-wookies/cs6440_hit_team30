@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :basic_info, only: [:index]
   resources :graphs, only: [:index]
   resources :observations, only: [:index, :create]
+  resources :conditions, only: [:index, :create]
 
   resources :pages, only: [:index] do
    collection do

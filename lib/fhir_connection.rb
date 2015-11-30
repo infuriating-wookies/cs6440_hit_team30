@@ -107,6 +107,19 @@ class FhirConnection
     return r.code == 201
   end
 
+  def self.make_patient_condition(user_id, condCode, condDisplay)
+    href = BASE_URL + "/Condition"
+    #binding.pry
+    body = make_condition_json(user_id, condCode, condDisplay)
+    #binding.pry
+    r = HTTParty.post(href,
+                      headers: CREATE_HEADERS,
+                      body: body
+    )
+    #binding.pry
+    return r.code == 201
+  end
+
   def self.graphable_height_info(user_id)
     get_patient_height_observations(user_id)['entry']
       .map{ |e| [DateTime.strptime(e['resource']['appliesDateTime']).to_date.to_s, e['resource']['valueQuantity']['value']] }
@@ -229,6 +242,32 @@ class FhirConnection
                     system: "http://loinc.org",
                     code: "39156-5",
                     display:"Body mass ratio Measured"
+                }
+            ]
+        },
+        valueQuantity: {
+            value: bmi_in_kg_m2,
+            units: "kg/m2",
+            system: "http://unitsofmeasure.org",
+            code: "kg/m2"
+        },
+        appliesDateTime: Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        status: "final",
+        subject: {
+            reference: "Patient/#{patient_id}"
+        }
+    }.to_json
+  end
+
+  def self.make_condition_json(user_id, condCode, condDisplay)
+  {
+        resourceType: "Condition",
+        code: {
+            coding: [
+                {
+                    system: "http://snomed.info/sct",
+                    code: condCode,
+                    display:condDisplay
                 }
             ]
         },

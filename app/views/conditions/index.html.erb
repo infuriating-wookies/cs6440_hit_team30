@@ -1,0 +1,15 @@
+<h2> Record your new Condition </h2>
+
+<%= form_tag("/conditions", method: "post") do %>
+  <%= label_tag(:condCode, "Snomed CT code:") %>
+  <%= number_field_tag(:condCode) %>
+  <br>
+  <%= label_tag(:condDisplay, "Display name:") %>
+  <%= number_field_tag(:condDisplay) %>
+  <%= submit_tag("Submit") %>
+
+    <%= radio_button_tag(:diabetes1, "child") %>
+    <%= label_tag(:age_child, "I am younger than 21") %>
+    <%= radio_button_tag(:age, "adult") %>
+    <%= label_tag(:age_adult, "I'm over 21") %>
+<% end %>
