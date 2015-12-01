@@ -37,7 +37,7 @@
 <% end %>
 </ul>
 
-<% if @bmi_info['total']>0 %>
+<% if @bmi_info && @bmi_info['total'] > 0 %>
     <h4> BMI: </h4>
     <ul>
         <li><strong> Measurement: </strong> <%= @bmi_info['entry'].last['resource']['valueQuantity']['value'] %>
@@ -48,5 +48,15 @@
     <br>
 <% end %>
 </ul>
-
-<%= link_to 'Export as JSON', basic_info_index_path(format: :json) %>
+<% if @condition_info['total'] > 0 %>
+    <h4> Conditions Present: </h4>
+    <% @condition_info['entry'].each do |condition| %>
+        <ul>
+        <li><strong>Condition: </strong> <%= condition['resource']['code']['coding'][0]['display'] %>
+        <strong>Onset Date: </strong> <%= DateTime.parse(condition['resource']['onsetDateTime']).to_date.to_s%></li>
+        </ul>
+    <% end %>
+<% end %>
+<br>
+<%= link_to 'Export as JSON', basic_info_index_path(format: :json) %><br>
+<br>

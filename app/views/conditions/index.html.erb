@@ -1,15 +1,23 @@
-<h2> Record your new Condition </h2>
+<h2 xmlns="http://www.w3.org/1999/html"> Record your new Condition </h2>
+<style>
+    div.form{
+        position: relative;
+        text-align: left;
+    }
+</style>
 
 <%= form_tag("/conditions", method: "post") do %>
-  <%= label_tag(:condCode, "Snomed CT code:") %>
-  <%= number_field_tag(:condCode) %>
-  <br>
-  <%= label_tag(:condDisplay, "Display name:") %>
-  <%= number_field_tag(:condDisplay) %>
-  <%= submit_tag("Submit") %>
+    <!--<label for="Diabetes">-->
+      <!--<label class="alignleft">Diabetes</label>-->
+      <!--<input type="radio" id="yes" name="diabetes-yes" value="yes">Yes-->
+      <!--<input type="radio" id="no" name="diabetes-no" value="yes">No-->
+    <!--</label>-->
 
-    <%= radio_button_tag(:diabetes1, "child") %>
-    <%= label_tag(:age_child, "I am younger than 21") %>
-    <%= radio_button_tag(:age, "adult") %>
-    <%= label_tag(:age_adult, "I'm over 21") %>
+    <div class="form">
+        <text align="left" style="color:black; font-size:20px;">Diabetes:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+        <input type="radio" name="diabetes" value="yes"><text style="color:black; font-size:18px; text-align:left;">Yes&nbsp;&nbsp;</text>
+        <input type="radio" name="diabetes" value="no" checked><text style="color:black; font-size:18px; text-align:left;">No</text>
+    </div>
+    <%= submit_tag("Submit") %>
+    </form>
 <% end %>

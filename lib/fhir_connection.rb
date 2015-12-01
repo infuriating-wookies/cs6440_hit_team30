@@ -75,6 +75,20 @@ class FhirConnection
     JSON.parse(r.body)
   end
 
+  def self.get_patient_condions(user_id)
+    href = BASE_URL + "/Condition"
+    r = HTTParty.get(href, headers: DEFAULT_HEADERS,
+                     query: {
+                         'patient' => user_id,
+                         '_count' => 100
+                     }
+    )
+    #binding.pry
+    return nil unless r.success?
+    JSON.parse(r.body)
+  end
+
+
   def self.make_patient_height_observation(user_id, height_in_inches)
     href = BASE_URL + "/Observation"
     r = HTTParty.post(href,
@@ -107,16 +121,13 @@ class FhirConnection
     return r.code == 201
   end
 
-  def self.make_patient_condition(user_id, condCode, condDisplay)
+  def self.make_patient_condion_diabetes(user_id)
     href = BASE_URL + "/Condition"
-    #binding.pry
-    body = make_condition_json(user_id, condCode, condDisplay)
-    #binding.pry
+    body = make_condition_diabetes_json(user_id)
     r = HTTParty.post(href,
                       headers: CREATE_HEADERS,
                       body: body
     )
-    #binding.pry
     return r.code == 201
   end
 
@@ -259,29 +270,24 @@ class FhirConnection
     }.to_json
   end
 
-  def self.make_condition_json(user_id, condCode, condDisplay)
+  def self.make_condition_diabetes_json(patient_id)
   {
         resourceType: "Condition",
+        patient: { "reference":"Patient/#{patient_id}"
+                 },
         code: {
             coding: [
                 {
                     system: "http://snomed.info/sct",
-                    code: condCode,
-                    display:condDisplay
+                    code: "46635009",
+                    display:"Type 1 diabetes mellitus"
                 }
-            ]
+            ],
+            "text":"Type 1 diabetes mellitus, SNOMED-CT, 46635009"
         },
-        valueQuantity: {
-            value: bmi_in_kg_m2,
-            units: "kg/m2",
-            system: "http://unitsofmeasure.org",
-            code: "kg/m2"
-        },
-        appliesDateTime: Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        status: "final",
-        subject: {
-            reference: "Patient/#{patient_id}"
-        }
+        clinicalStatus:"unknown",
+        onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "notes":"Type 1 Diabetes"
     }.to_json
   end
 
