@@ -131,6 +131,46 @@ class FhirConnection
     return r.code == 201
   end
 
+  def self.make_patient_condion_diabetes_t2(user_id)
+    href = BASE_URL + "/Condition"
+    body = make_condition_diabetes_t2_json(user_id)
+    r = HTTParty.post(href,
+                      headers: CREATE_HEADERS,
+                      body: body
+    )
+    return r.code == 201
+  end
+
+  def self.make_patient_condion_hypertension(user_id)
+    href = BASE_URL + "/Condition"
+    body = make_condition_hypertension_json(user_id)
+    r = HTTParty.post(href,
+                      headers: CREATE_HEADERS,
+                      body: body
+    )
+    return r.code == 201
+  end
+
+  def self.make_patient_condion_coronary(user_id)
+    href = BASE_URL + "/Condition"
+    body = make_condition_coronary_json(user_id)
+    r = HTTParty.post(href,
+                      headers: CREATE_HEADERS,
+                      body: body
+    )
+    return r.code == 201
+  end
+
+  def self.make_patient_condion_arthritis(user_id)
+    href = BASE_URL + "/Condition"
+    body = make_condition_arthritis_json(user_id)
+    r = HTTParty.post(href,
+                      headers: CREATE_HEADERS,
+                      body: body
+    )
+    return r.code == 201
+  end
+
   def self.graphable_height_info(user_id)
     get_patient_height_observations(user_id)['entry']
       .map{ |e| [DateTime.strptime(e['resource']['appliesDateTime']).to_date.to_s, e['resource']['valueQuantity']['value']] }
@@ -288,6 +328,94 @@ class FhirConnection
         clinicalStatus:"unknown",
         onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "notes":"Type 1 Diabetes"
+    }.to_json
+  end
+
+
+  def self.make_condition_diabetes_t2_json(patient_id)
+    {
+        resourceType: "Condition",
+        patient: { "reference":"Patient/#{patient_id}"
+        },
+        code: {
+            coding: [
+                {
+                    system: "http://snomed.info/sct",
+                    code: "44054006",
+                    display:"Type 2 diabetes mellitus"
+                }
+            ],
+            "text":"Type 2 diabetes mellitus, SNOMED-CT, 44054006"
+        },
+        clinicalStatus:"unknown",
+        onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "notes":"Type 2 Diabetes"
+    }.to_json
+  end
+
+
+  def self.make_condition_hypertension_json(patient_id)
+    {
+        resourceType: "Condition",
+        patient: { "reference":"Patient/#{patient_id}"
+        },
+        code: {
+            coding: [
+                {
+                    system: "http://snomed.info/sct",
+                    code: "38341003",
+                    display:"Hypertensive disorder"
+                }
+            ],
+            "text":"Hypertensive disorder, SNOMED-CT, 38341003"
+        },
+        clinicalStatus:"unknown",
+        onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "notes":"38341003"
+    }.to_json
+  end
+
+
+  def self.make_condition_arthritis_json(patient_id)
+    {
+        resourceType: "Condition",
+        patient: { "reference":"Patient/#{patient_id}"
+        },
+        code: {
+            coding: [
+                {
+                    system: "http://snomed.info/sct",
+                    code: "69896004",
+                    display:"Rheumatoid arthritis"
+                }
+            ],
+            "text":"Rheumatoid arthritis, SNOMED-CT, 69896004"
+        },
+        clinicalStatus:"unknown",
+        onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "notes":"Rheumatoid arthritis"
+    }.to_json
+  end
+
+
+  def self.make_condition_coronary_json(patient_id)
+    {
+        resourceType: "Condition",
+        patient: { "reference":"Patient/#{patient_id}"
+        },
+        code: {
+            coding: [
+                {
+                    system: "http://snomed.info/sct",
+                    code: "53741008",
+                    display:"	Coronary arteriosclerosis"
+                }
+            ],
+            "text":"Coronary arteriosclerosis, SNOMED-CT, 53741008"
+        },
+        clinicalStatus:"unknown",
+        onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "notes":"	Coronary arteriosclerosis"
     }.to_json
   end
 

@@ -1,4 +1,4 @@
-<h2 xmlns="http://www.w3.org/1999/html"> Record your new Condition </h2>
+<h2 class="text-center"> Record Conditions </h2>
 <style>
     div.form{
         position: relative;
@@ -7,16 +7,37 @@
 </style>
 
 <%= form_tag("/conditions", method: "post") do %>
-    <!--<label for="Diabetes">-->
-      <!--<label class="alignleft">Diabetes</label>-->
-      <!--<input type="radio" id="yes" name="diabetes-yes" value="yes">Yes-->
-      <!--<input type="radio" id="no" name="diabetes-no" value="yes">No-->
-    <!--</label>-->
 
     <div class="form">
-        <text align="left" style="color:black; font-size:20px;">Diabetes:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-        <input type="radio" name="diabetes" value="yes"><text style="color:black; font-size:18px; text-align:left;">Yes&nbsp;&nbsp;</text>
-        <input type="radio" name="diabetes" value="no" checked><text style="color:black; font-size:18px; text-align:left;">No</text>
+      <li>
+        <text align="left" style="color:black"><strong>Diabetes Type 1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></text>
+        <input type="radio" name="diabetes" value="yes"><text style="color:black; text-align:left;">&nbsp;Yes&nbsp;&nbsp;</text>
+        <input type="radio" name="diabetes" value="no" checked><text style="color:black; text-align:left;">&nbsp;No</text>
+      </li>
+      <li>
+        <text align="left" style="color:black"><strong>Diabetes Type 2:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></text>
+        <input type="radio" name="diabetesT2" value="yes"><text style="color:black; text-align:left;">&nbsp;Yes&nbsp;&nbsp;</text>
+        <input type="radio" name="diabetesT2" value="no" checked><text style="color:black; text-align:left;">&nbsp;No</text>
+      </li>
+      <li>
+        <text align="left" style="color:black"><strong>Hypertension:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></text>
+        <input type="radio" name="hypertension" value="yes"><text style="color:black; text-align:left;">&nbsp;Yes&nbsp;&nbsp;</text>
+        <input type="radio" name="hypertension" value="no" checked><text style="color:black; text-align:left;">&nbsp;No</text>
+      </li>
+      <li>
+        <text align="left" style="color:black"><strong>Rheumatoid arthritis:;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></text>
+        <input type="radio" name="arthritis" value="yes"><text style="color:black; text-align:left;">&nbsp;Yes&nbsp;&nbsp;</text>
+        <input type="radio" name="arthritis" value="no" checked><text style="color:black; text-align:left;">&nbsp;No</text>
+      </li>
+      <li>
+        <text align="left" style="color:black"><strong>Coronary arteriosclerosis:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></text>
+        <input type="radio" name="coronary" value="yes"><text style="color:black; text-align:left;">&nbsp;Yes&nbsp;&nbsp;</text>
+        <input type="radio" name="coronary" value="no" checked><text style="color:black; text-align:left;">&nbsp;No</text>
+      </li>
     </div>
     <%= submit_tag("Submit") %>
     </form>
