@@ -313,7 +313,7 @@ class FhirConnection
   def self.make_condition_diabetes_json(patient_id)
   {
         resourceType: "Condition",
-        patient: { "reference":"Patient/#{patient_id}"
+        patient: { reference: "Patient/#{patient_id}"
                  },
         code: {
             coding: [
@@ -323,11 +323,11 @@ class FhirConnection
                     display:"Type 1 diabetes mellitus"
                 }
             ],
-            "text":"Type 1 diabetes mellitus, SNOMED-CT, 46635009"
+            text: "Type 1 diabetes mellitus, SNOMED-CT, 46635009"
         },
         clinicalStatus:"unknown",
         onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "notes":"Type 1 Diabetes"
+        notes: "Type 1 Diabetes"
     }.to_json
   end
 
@@ -335,7 +335,7 @@ class FhirConnection
   def self.make_condition_diabetes_t2_json(patient_id)
     {
         resourceType: "Condition",
-        patient: { "reference":"Patient/#{patient_id}"
+        patient: { reference: "Patient/#{patient_id}"
         },
         code: {
             coding: [
@@ -345,11 +345,11 @@ class FhirConnection
                     display:"Type 2 diabetes mellitus"
                 }
             ],
-            "text":"Type 2 diabetes mellitus, SNOMED-CT, 44054006"
+            text: "Type 2 diabetes mellitus, SNOMED-CT, 44054006"
         },
         clinicalStatus:"unknown",
         onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "notes":"Type 2 Diabetes"
+        notes: "Type 2 Diabetes"
     }.to_json
   end
 
@@ -357,7 +357,7 @@ class FhirConnection
   def self.make_condition_hypertension_json(patient_id)
     {
         resourceType: "Condition",
-        patient: { "reference":"Patient/#{patient_id}"
+        patient: { reference: "Patient/#{patient_id}"
         },
         code: {
             coding: [
@@ -367,11 +367,11 @@ class FhirConnection
                     display:"Hypertensive disorder"
                 }
             ],
-            "text":"Hypertensive disorder, SNOMED-CT, 38341003"
+            text: "Hypertensive disorder, SNOMED-CT, 38341003"
         },
         clinicalStatus:"unknown",
         onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "notes":"38341003"
+        notes: "38341003"
     }.to_json
   end
 
@@ -379,7 +379,7 @@ class FhirConnection
   def self.make_condition_arthritis_json(patient_id)
     {
         resourceType: "Condition",
-        patient: { "reference":"Patient/#{patient_id}"
+        patient: { reference: "Patient/#{patient_id}"
         },
         code: {
             coding: [
@@ -389,11 +389,11 @@ class FhirConnection
                     display:"Rheumatoid arthritis"
                 }
             ],
-            "text":"Rheumatoid arthritis, SNOMED-CT, 69896004"
+            text: "Rheumatoid arthritis, SNOMED-CT, 69896004"
         },
         clinicalStatus:"unknown",
         onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "notes":"Rheumatoid arthritis"
+        notes: "Rheumatoid arthritis"
     }.to_json
   end
 
@@ -401,7 +401,7 @@ class FhirConnection
   def self.make_condition_coronary_json(patient_id)
     {
         resourceType: "Condition",
-        patient: { "reference":"Patient/#{patient_id}"
+        patient: { reference: "Patient/#{patient_id}"
         },
         code: {
             coding: [
@@ -411,11 +411,11 @@ class FhirConnection
                     display:"	Coronary arteriosclerosis"
                 }
             ],
-            "text":"Coronary arteriosclerosis, SNOMED-CT, 53741008"
+            text: "Coronary arteriosclerosis, SNOMED-CT, 53741008"
         },
         clinicalStatus:"unknown",
         onsetDateTime:Time.now.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "notes":"	Coronary arteriosclerosis"
+        notes: "	Coronary arteriosclerosis"
     }.to_json
   end
 
