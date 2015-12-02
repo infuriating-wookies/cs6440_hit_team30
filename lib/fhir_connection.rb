@@ -13,30 +13,39 @@ class FhirConnection
     "Accept" => 'application/json'
   }
 
+  class FhirClient
+    include HTTParty
+    default_timeout 1
+  end
+
   CREATE_HEADERS = DEFAULT_HEADERS.merge('Content-Type' => 'application/json+fhir')
 
   def self.get_patient_info(id)
     href = BASE_URL + "/Patient/#{id}"
-    r = HTTParty.get(href,
+    r = FhirClient.get(href,
       headers: DEFAULT_HEADERS
     )
     return nil unless r.success?
     JSON.parse(r.body)
+  rescue StandardError
+    nil
   end
 
   def self.get_patient_prescriptions(user_id)
     href = BASE_URL + "/MedicationPrescription"
-    r = HTTParty.get(href,
+    r = FhirClient.get(href,
       headers: DEFAULT_HEADERS,
       query: {'patient._id' => user_id}
     )
     return nil unless r.success?
     JSON.parse(r.body)
+  rescue StandardError
+    nil
   end
 
   def self.get_patient_height_observations(user_id)
     href = BASE_URL + "/Observation"
-    r = HTTParty.get(href,
+    r = FhirClient.get(href,
       headers: DEFAULT_HEADERS,
       query: {
         'patient' => user_id,
@@ -45,11 +54,13 @@ class FhirConnection
     )
     return nil unless r.success?
     JSON.parse(r.body)
+  rescue StandardError
+    nil
   end
 
   def self.get_patient_weight_observations(user_id)
     href = BASE_URL + "/Observation"
-    r = HTTParty.get(href,
+    r = FhirClient.get(href,
       headers: DEFAULT_HEADERS,
       query: {
         'patient' => user_id,
@@ -59,11 +70,13 @@ class FhirConnection
     )
     return nil unless r.success?
     JSON.parse(r.body)
+  rescue StandardError
+    nil
   end
 
   def self.get_patient_bmi_observations(user_id)
     href = BASE_URL + "/Observation"
-    r = HTTParty.get(href, headers: DEFAULT_HEADERS,
+    r = FhirClient.get(href, headers: DEFAULT_HEADERS,
       query: {
         'patient' => user_id,
         'code' => 'LOINC|39156-5',
@@ -73,11 +86,13 @@ class FhirConnection
     #binding.pry
     return nil unless r.success?
     JSON.parse(r.body)
+  rescue StandardError
+    nil
   end
 
   def self.get_patient_condions(user_id)
     href = BASE_URL + "/Condition"
-    r = HTTParty.get(href, headers: DEFAULT_HEADERS,
+    r = FhirClient.get(href, headers: DEFAULT_HEADERS,
                      query: {
                          'patient' => user_id,
                          '_count' => 100
@@ -86,26 +101,32 @@ class FhirConnection
     #binding.pry
     return nil unless r.success?
     JSON.parse(r.body)
+  rescue StandardError
+    nil
   end
 
 
   def self.make_patient_height_observation(user_id, height_in_inches)
     href = BASE_URL + "/Observation"
-    r = HTTParty.post(href,
+    r = FhirClient.post(href,
       headers: CREATE_HEADERS,
       body: height_measurement_json(user_id, height_in_inches)
     )
     return r.code == 201
+  rescue StandardError
+    nil
   end
 
   def self.make_patient_weight_observation(user_id, weight_in_kg)
     href = BASE_URL + "/Observation"
     body = weight_measurement_json(user_id, weight_in_kg)
-    r = HTTParty.post(href,
+    r = FhirClient.post(href,
       headers: CREATE_HEADERS,
       body: body
     )
     return r.code == 201
+  rescue StandardError
+    nil
   end
 
   def self.make_patient_bmi_observation(user_id, bmi_in_kg_cm2)
@@ -113,62 +134,74 @@ class FhirConnection
     #binding.pry
     body = bmi_measurement_json(user_id, bmi_in_kg_cm2)
     #binding.pry
-    r = HTTParty.post(href,
+    r = FhirClient.post(href,
                       headers: CREATE_HEADERS,
                       body: body
     )
     #binding.pry
     return r.code == 201
+  rescue StandardError
+    nil
   end
 
   def self.make_patient_condion_diabetes(user_id)
     href = BASE_URL + "/Condition"
     body = make_condition_diabetes_json(user_id)
-    r = HTTParty.post(href,
+    r = FhirClient.post(href,
                       headers: CREATE_HEADERS,
                       body: body
     )
     return r.code == 201
+  rescue StandardError
+    nil
   end
 
   def self.make_patient_condion_diabetes_t2(user_id)
     href = BASE_URL + "/Condition"
     body = make_condition_diabetes_t2_json(user_id)
-    r = HTTParty.post(href,
+    r = FhirClient.post(href,
                       headers: CREATE_HEADERS,
                       body: body
     )
     return r.code == 201
+  rescue StandardError
+    nil
   end
 
   def self.make_patient_condion_hypertension(user_id)
     href = BASE_URL + "/Condition"
     body = make_condition_hypertension_json(user_id)
-    r = HTTParty.post(href,
+    r = FhirClient.post(href,
                       headers: CREATE_HEADERS,
                       body: body
     )
     return r.code == 201
+  rescue StandardError
+    nil
   end
 
   def self.make_patient_condion_coronary(user_id)
     href = BASE_URL + "/Condition"
     body = make_condition_coronary_json(user_id)
-    r = HTTParty.post(href,
+    r = FhirClient.post(href,
                       headers: CREATE_HEADERS,
                       body: body
     )
     return r.code == 201
+  rescue StandardError
+    nil
   end
 
   def self.make_patient_condion_arthritis(user_id)
     href = BASE_URL + "/Condition"
     body = make_condition_arthritis_json(user_id)
-    r = HTTParty.post(href,
+    r = FhirClient.post(href,
                       headers: CREATE_HEADERS,
                       body: body
     )
     return r.code == 201
+  rescue StandardError
+    nil
   end
 
   def self.graphable_height_info(user_id)
@@ -197,29 +230,33 @@ class FhirConnection
 
   def self.get_medication(id)
     href = BASE_URL + "/Medication"
-    r = HTTParty.get(href,
+    r = FhirClient.get(href,
       headers: DEFAULT_HEADERS,
       query: {'_id' => id}
     )
     return nil unless r.success?
     JSON.parse(r.body)
+  rescue StandardError
+    nil
   end
 
   # Takes in the given data and creates a user with that information. Unfortunately the API
   # does not return an id for the user it created to we will need to find a way around this.
   def self.create_user(last_name, first_name, gender, address, city, state, postal_code, birth_date)
     href = BASE_URL + "/Patient"
-    r = HTTParty.post(href,
+    r = FhirClient.post(href,
       headers: CREATE_HEADERS,
       body: user_creation_json(last_name, first_name, gender, address, city, state, postal_code, birth_date)
     )
     return r.code == 201
+  rescue StandardError
+    nil
   end
 
   # this looks up a user by their first and alst name and returns their ID
   def self.find_user_id(last_name, first_name)
     href = BASE_URL + "/Patient"
-    r = HTTParty.get(href,
+    r = FhirClient.get(href,
       headers: DEFAULT_HEADERS,
       query: {
         'family' => last_name,
@@ -228,6 +265,8 @@ class FhirConnection
     )
     return nil unless r.success?
     JSON.parse(r.body)['entry'][0]['resource']['id']
+  rescue StandardError
+    nil
   end
 
   private
@@ -451,7 +490,7 @@ class FhirConnection
   # def self.get_patient_condition(user_id, id)
   #
   #   href = BASE_URL + "/Condition"
-  #   r = HTTParty.get(href,
+  #   r = FhitClient.get(href,
   #                    headers: DEFAULT_HEADERS,
   #                    query: {'patient' => user_id, '_id' =>id}
   #   )

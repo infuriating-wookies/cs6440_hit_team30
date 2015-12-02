@@ -8,7 +8,7 @@
       <br>
       <li><strong> Gender: </strong> <%= @current_user.gender %></li>
       <br>
-      <li><strong> Birthday: </strong> <%= @current_user.birthday.to_date.to_s %></li>
+      <li><strong> Birthday: </strong> <%= @current_user.birthday.try(:to_date).try(:to_s) %></li>
       <br>
 
       <li><strong> State: </strong> <%= @current_user.state %></li>
@@ -60,3 +60,4 @@
 <br>
 <%= link_to 'Export as JSON', basic_info_index_path(format: :json) %><br>
 <br>
+<%= link_to 'Edit', basic_info_edit_path %><br>
