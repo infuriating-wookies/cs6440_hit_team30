@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
+<html class="nojs" lang="en">
+  <head>    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Cs6440HitTeam30" %></title>
@@ -37,19 +36,13 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
+    <!--[if lt IE 8]><div class="unsupported-browsers alert-message"><div class="content"><p class="warning-msg">Install or upgrade to one of these modern browsers for a more pleasant experience.</p><div class="browser-icon"><a href='http://www.firefox.com' target='_blank'><img src='https://d32bg403aomlve.cloudfront.net/s/ch-static/img/firefox-icon.1ad107dd1b0d.png' alt='Get Firefox' /></a></div><div class="browser-icon"><a href='http://www.google.com/chrome' target='_blank'><img src='https://d32bg403aomlve.cloudfront.net/s/ch-static/img/chrome-icon.b6b41225b7f5.png' alt='Get Google Chrome' /></a></div><div class="browser-icon"><a href='http://www.apple.com/safari/download/' target='_blank'><img src='https://d32bg403aomlve.cloudfront.net/s/ch-static/img/safari-icon.33249d975764.png' alt='Get Safari' /></a></div><div class="browser-icon"><a href='http://www.browserforthebetter.com/download.html' target='_blank'><img src='https://d32bg403aomlve.cloudfront.net/s/ch-static/img/ie8-icon.1a88ed25fc42.png' alt='Upgrade Internet Explorer' /></a></div></div></div><![endif]-->
+    <header class="main-nav site-header unauth-header fixed">
 
-    <div class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <!-- <a class="navbar-brand" href="<%= root_path%>">Cs6440HitTeam30</a> -->
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
+<nav>
+    <ul>
             <li><a href="<%= root_path%>">Home</a></li>
-            <li><%= link_to "About Us", about_us_pages_path  %></li>
+            
             <% if current_user %>
               <li><%= link_to "Basic Info", basic_info_index_path  %></li>
               <li><%= link_to "Medications", medications_path  %></li>
@@ -58,26 +51,32 @@
               <li><%= link_to "Graphs", graphs_path %></li>
               <li><%= link_to "Sign Out",  destroy_user_session_path, method: :delete %></li>
             <% else %>
+              <li><%= link_to "About Us", about_us_pages_path  %></li>
               <li><%= link_to "Sign In",  new_user_session_path %></li>
             <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
+    </ul>
+</nav>
 
-    <div class="container">
-      <div class="row">
+</header>
+
         <div class="col-lg-9">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
-      </div><!--/row-->
+    
 
-      <footer>
-        <p>&copy; Company 2015</p>
-      </footer>
+    <footer>
+<div class="container">
+  <ul>
+    <li><a href="" target="_blank">&copy; 2015 Health Portal</a></li>
 
-    </div> <!-- /container -->
+    
+  </ul>
+</div>
+</footer
+
+    
+
 
   </body>
 </html>
