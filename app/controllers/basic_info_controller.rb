@@ -12,4 +12,18 @@ class BasicInfoController < ApplicationController
       format.json { render json: [@height_info, @weight_info, @bmi_info, @condition_info] }
     end
   end
+
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    update_status = @user.update_attributes(params[:user].permit(:firstname, :lastname, :email, :birthday, :state, :gender, :address, :postal_code))
+    if update_status
+      redirect_to basic_info_index_path
+    else
+      render :edit
+    end
+  end
 end

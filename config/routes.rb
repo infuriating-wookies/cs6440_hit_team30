@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :test, only: [:show]
   resources :medications, only: [:index]
   resources :basic_info, only: [:index]
+  get '/basic_info/edit' => 'basic_info#edit', as: 'basic_info_edit'
+  patch '/basic_info' => 'basic_info#update', as: 'basic_info_update'
   resources :graphs, only: [:index]
   resources :observations, only: [:index, :create]
   resources :conditions, only: [:index, :create]

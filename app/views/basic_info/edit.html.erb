@@ -1,0 +1,51 @@
+<%= simple_form_for @user, url: basic_info_update_path do |f| %>
+
+<div class="field">
+  <%= f.label :firstname %><br />
+  <%= f.text_field :firstname, autofocus: true, class: "form-control" %>
+</div>
+
+<div class="field">
+  <%= f.label :lastname %><br />
+  <%= f.text_field :lastname, autofocus: true, class: "form-control"%>
+</div>
+
+<div class="field">
+  <%= f.label :gender %><br />
+  <%= f.select :gender, [['Male', 'Male'], ['Female', 'Female'], ['Other', 'Other']], autofocus: true, class: "form-control" %>
+</div>
+
+<div class="field">
+  <%= f.label :address%><br />
+  <%= f.text_field :address, autofocus: true, class: "form-control" %>
+</div>
+
+<div class="field">
+  <%= f.label :city %><br />
+  <%= f.text_field :city, autofocus: true, class: "form-control" %>
+</div>
+
+<div class="field">
+  <%= f.label :state%><br />
+  <%= f.select :state, us_states %>
+</div>
+
+<div class="field">
+  <%= f.label :postal_code%><br />
+  <%= f.text_field :postal_code, autofocus: true, class: "form-control" %>
+</div>
+
+<div class="field">
+  <%= f.label :birthday%><br />
+  <%= f.date_field :birthday, autofocus: true, class: "form-control" %>
+</div>
+
+<div class="field">
+  <%= f.label :email %><br />
+  <%= f.email_field :email, autofocus: true, class: "form-control" %>
+</div>
+  <br>
+
+  <%= f.submit %>
+
+<% end %>
