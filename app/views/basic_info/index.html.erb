@@ -13,7 +13,7 @@
 
       <li><strong> State: </strong> <%= @current_user.state %></li>
 </ul>
-<% if @height_info['total'] > 0 %>
+<% if @height_info && @height_info['total'] > 0 %>
   <h4> Height: </h4>
   <ul>
       <li><strong> Measurement: </strong> <%= @height_info['entry'].last['resource']['valueQuantity']['value'] %>
@@ -25,7 +25,7 @@
 <% end %>
 </ul>
 
-<% if @weight_info['total'] > 0 %>
+<% if @weight_info && @weight_info['total'] > 0 %>
   <h4> Weight: </h4>
   <ul>
       <li><strong> Measurement: </strong> <%= @weight_info['entry'].last['resource']['valueQuantity']['value'] %>
@@ -48,7 +48,7 @@
     <br>
 <% end %>
 </ul>
-<% if @condition_info['total'] > 0 %>
+<% if @condition_info && @condition_info['total'] > 0 %>
     <h4> Conditions Present: </h4>
     <% @condition_info['entry'].each do |condition| %>
         <ul>
