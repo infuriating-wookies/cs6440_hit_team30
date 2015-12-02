@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
 
   def index
+    redirect_to basic_info_index_path and return if current_user
     render layout: 'homepage'
   end
 
