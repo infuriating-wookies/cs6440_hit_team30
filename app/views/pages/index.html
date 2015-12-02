@@ -1,14 +1,16 @@
 <div class="page landing wrapper">
     <div class="landing-head">
         <div class="container">
+
             <article id="landing-sign-in" class="grid">
                 <section id="sign-in" class="half">
                     <header id="learn-more">
                         <h1 >Health <span style="color:#7bc144;">Portal</span></h1>
                         <p id="slogan" class="slogan p">Take control of your health.<sup>SM</sup></p>
                     </header>
+                    <% unless current_user %>
                     <form id="login-form" method="post" action="/users/sign_in">
-                        
+
                         <input type="hidden" value="" name="csrfmiddlewaretoken" />
                         <fieldset>
                           <div class="field" id="field_login_username">
@@ -29,9 +31,11 @@
                             <button class="secondary large" type="submit">Sign In</button>
                         </fieldset>
                     </form>
+                    <% end %>
                 </section>
                 <section id="why-a-phr" class="promo-item half">
-					<figure class="half">				
+
+					<figure class="half">
                     <img src="https://d32bg403aomlve.cloudfront.net/s/ch-static/img/health_in_one_place.222b073b8422.png" />
 					</figure>
                 </section>
@@ -44,13 +48,13 @@
             <section  class="grid alternating">
                 <div class="col1of3" style="text-align:center;">
                     <h1>All your health in one place</h1>
-                    <p> Health portal provides one place for all of the information you need to manage your health</p> 
-                
+                    <p> Health portal provides one place for all of the information you need to manage your health</p>
+
 				</div>
 				<div class="col1of3" style="text-align:center;">
 					<h1 >Track &amp; improve your health</h1>
                     <p>Capturing personal measures helps you and your doctor proactively manage your health trends and track progress against your health goals.  </p>
-                    
+
 
 				</div>
 				<div class="col1of3" style="text-align:center;">
