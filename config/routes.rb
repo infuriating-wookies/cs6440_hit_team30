@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :observations, only: [:index, :create]
   resources :conditions, only: [:index, :create]
 
+  get '/youtube' => 'pages#youtube'
+
   resources :pages, only: [:index] do
    collection do
      get :about_us

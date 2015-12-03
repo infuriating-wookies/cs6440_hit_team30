@@ -8,4 +8,7 @@ class PagesController < ApplicationController
   def about_us
   end
 
+  def youtube
+    redirect_to "https://www.youtube.com/watch?v=8ctnbq6tfU0&feature=youtu.be"
+  end
 end
